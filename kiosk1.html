@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiosk 1 – Musterseite</title>
+  <meta name="description" content="Kiosk 1 – Zigaretten, Tabak, Getränke, Snacks. Täglich 06:00–24:00 Uhr." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --panel: #111213;
+      --gold: #d4af37;
+      --text: #e8e8e8;
+      --muted: #bcbcbc;
+      --ring: rgba(212,175,55,0.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, sans-serif;
+      color: var(--text); background: radial-gradient(1200px 800px at 80% -10%, rgba(212,175,55,0.08), transparent 60%), var(--bg);
+    }
+    a { color: var(--gold); text-decoration: none; }
+    /* Header */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(160%) blur(6px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.35));
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 16px; padding: 14px 20px; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight: 700; letter-spacing: 0.6px; }
+    .brand-mark { width: 36px; height:36px; border-radius: 11px; background: linear-gradient(135deg, var(--gold), #b68c2b);
+      display:grid; place-items:center; color:#111; font-weight:900; box-shadow: 0 0 0 3px #111, 0 6px 24px rgba(212,175,55,0.3); }
+    .spacer { flex: 1; }
+    .nav a.btn { border:1px solid var(--gold); padding:8px 14px; border-radius: 999px; font-weight:600; transition: .2s; }
+    .nav a.btn:hover { background: var(--gold); color:#111; box-shadow: 0 8px 24px var(--ring); }
+
+    /* Hero */
+    .hero { max-width:1100px; margin: 28px auto 0; padding: 28px 20px 10px; display:grid; grid-template-columns: 1fr; gap: 14px; }
+    .badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(212,175,55,0.25); color:var(--muted); font-size:12px; }
+    .badge .dot { width:8px; height:8px; border-radius:999px; background:#00d27a; box-shadow:0 0 0 3px rgba(0,210,122,0.15); }
+    h1 { font-size: clamp(28px, 3.6vw, 44px); line-height:1.1; margin: 4px 0 0; }
+    .sub { color: var(--muted); max-width: 70ch; }
+    .hero-cards { display:grid; grid-template-columns: repeat(12, 1fr); gap:14px; margin-top: 12px; }
+    .card { grid-column: span 12; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border:1px solid rgba(212,175,55,0.18); border-radius: 18px; padding:16px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+    .card h3 { margin: 0 0 6px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); }
+    .grid-2 { grid-column: span 12; display: grid; grid-template-columns: 1fr; gap:12px; }
+    .pill { display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px; background: #0f1012; border:1px solid rgba(212,175,55,0.18); }
+    .pill svg { width:18px; height:18px; }
+
+    /* Catalog */
+    .section { max-width:1100px; margin: 26px auto; padding: 0 20px; }
+    .section h2 { font-size: 22px; margin: 6px 0 12px; }
+    .categories { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; }
+    .cat { background: linear-gradient(180deg, rgba(212,175,55,0.08), rgba(255,255,255,0.02)); border:1px solid rgba(212,175,55,0.2); border-radius: 16px; padding: 14px; display:flex; align-items:center; justify-content:space-between; }
+    .cat span { font-weight:600; }
+
+    .products { display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; margin-top: 10px; }
+    .product { background: var(--panel); border:1px solid rgba(212,175,55,0.16); border-radius: 16px; padding: 12px; display:flex; gap:12px; align-items:center; }
+    .thumb { width:56px; height:56px; border-radius: 12px; background: radial-gradient(40px 40px at 30% 20%, rgba(212,175,55,0.35), rgba(255,255,255,0.02)); border:1px solid rgba(212,175,55,0.22); box-shadow: inset 0 0 30px rgba(0,0,0,0.35); display:grid; place-items:center; font-size:20px; }
+    .meta { flex:1; }
+    .meta h4 { margin:0; font-size: 15px; }
+    .meta small { color: var(--muted); }
+    .price { font-weight:700; color: var(--gold); }
+
+    /* Info strip */
+    .info-strip { border-top:1px solid rgba(212,175,55,0.15); border-bottom:1px solid rgba(212,175,55,0.15); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.2)); }
+    .info-inner { max-width:1100px; margin: 0 auto; padding: 14px 20px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; }
+    .status { display:flex; align-items:center; gap:10px; }
+    .status .lamp { width:10px; height:10px; border-radius:999px; background:#ef4444; box-shadow:0 0 0 3px rgba(239,68,68,0.18); }
+
+    /* Footer */
+    footer { max-width:1100px; margin: 20px auto 60px; padding: 0 20px; color: var(--muted); }
+    footer .foot { display:flex; gap:16px; flex-wrap:wrap; justify-content:space-between; border-top:1px solid rgba(212,175,55,0.15); padding-top:16px; }
+
+    /* Responsive */
+    @media (min-width: 720px) {
+      .card { grid-column: span 6; }
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .categories { grid-template-columns: repeat(4, 1fr); }
+      .products { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .products { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" aria-label="Hauptnavigation">
+    <div class="nav-inner">
+      <div class="brand" aria-label="Marke">
+        <div class="brand-mark">K1</div>
+        <div>
+          <div style="font-size:14px; color:var(--muted); line-height:1;">Willkommen bei</div>
+          <div style="font-size:18px; line-height:1.2;">Kiosk 1</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <a class="btn" href="#sortiment">Sortiment</a>
+      <a class="btn" href="#kontakt">Kontakt</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="badge" id="openBadge" aria-live="polite"><span class="dot"></span><span>Heute geöffnet · 06:00–24:00</span></div>
+    <h1>Schwarz & Gold. <span style="color:var(--gold)">Kiosk 1</span> – dein Stop für Tabak, Getränke & Snacks.</h1>
+    <p class="sub">Zigaretten, Tabakwaren, Softdrinks, Bier, Wein, Likör, Wasser, Säfte, Süßigkeiten, Chips und Eis. Täglich von <strong>06:00</strong> bis <strong>24:00</strong> Uhr.</p>
+
+    <div class="hero-cards">
+      <section class="card" aria-labelledby="preiseTitle">
+        <h3 id="preiseTitle">Beliebte Artikel (Musterpreise)</h3>
+        <div class="products">
+          <article class="product" aria-label="Bier">
+            <div class="thumb">🍺</div>
+            <div class="meta">
+              <h4>Bier (0,5l)</h4>
+              <small>Gut gekühlt</small>
+            </div>
+            <div class="price">2,50&nbsp;€</div>
+          </article>
+          <article class="product" aria-label="Kaffee">
+            <div class="thumb">☕</div>
+            <div class="meta">
+              <h4>Tasse Kaffee</h4>
+              <small>Frisch gebrüht</small>
+            </div>
+            <div class="price">3,50&nbsp;€</div>
+          </article>
+          <article class="product" aria-label="Softdrink">
+            <div class="thumb">🥤</div>
+            <div class="meta">
+              <h4>Softdrink (0,5l)</h4>
+              <small>Cola/Fanta/Sprite</small>
+            </div>
+            <div class="price">ab&nbsp;2,90&nbsp;€</div>
+          </article>
+          <article class="product" aria-label="Süßigkeiten">
+            <div class="thumb">🍫</div>
+            <div class="meta">
+              <h4>Süßigkeiten</h4>
+              <small>Riegel & Mix</small>
+            </div>
+            <div class="price">ab&nbsp;1,50&nbsp;€</div>
+          </article>
+        </div>
+        <p style="margin-top:10px; color:var(--muted); font-size:12px">Hinweis: Beispielpreise · gesamtes Sortiment und finale Preise im Laden.</p>
+      </section>
+
+      <section class="card grid-2" aria-labelledby="zeitenTitle">
+        <div>
+          <h3 id="zeitenTitle">Öffnungszeiten</h3>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8v5l3 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Täglich 06:00–24:00</div>
+        </div>
+        <div>
+          <h3>Services</h3>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M6 10h12M9 14h6M8 18h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Zigaretten · Getränke · Snacks</div>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip" role="note">
+    <div class="info-inner">
+      <div class="status"><div class="lamp" id="lamp"></div><strong id="statusText">Geschlossen</strong></div>
+      <div>Preislage: eher höher – Premium Auswahl.</div>
+    </div>
+  </div>
+
+  <!-- CATALOG -->
+  <main class="section" id="sortiment">
+    <h2>Sortiment</h2>
+    <div class="categories" aria-label="Kategorien">
+      <div class="cat"><span>🟤 Zigaretten & Tabak</span><small>Marken & Zubehör</small></div>
+      <div class="cat"><span>🍺 Bier</span><small>Einzeln & Kisten</small></div>
+      <div class="cat"><span>🍷 Wein & Likör</span><small>Auswahl bekannt</small></div>
+      <div class="cat"><span>🥤 Softdrinks & Wasser</span><small>Kalt auf Lager</small></div>
+      <div class="cat"><span>🧃 Säfte</span><small>Mehrfrucht & Co.</small></div>
+      <div class="cat"><span>🍫 Süßigkeiten</span><small>Riegel & Tüten</small></div>
+      <div class="cat"><span>🍟 Chips</span><small>versch. Sorten</small></div>
+      <div class="cat"><span>🍧 Eis</span><small>am Stiel & Becher</small></div>
+    </div>
+
+    <h2 style="margin-top:18px">Musterartikel</h2>
+    <div class="products">
+      <article class="product"><div class="thumb">🚬</div><div class="meta"><h4>Zigaretten – Marke A</h4><small>20&nbsp;Stück</small></div><div class="price">8,50&nbsp;€</div></article>
+      <article class="product"><div class="thumb">🚬</div><div class="meta"><h4>Drehtabak – 30g</h4><small>mit/ohne Filter</small></div><div class="price">6,90&nbsp;€</div></article>
+      <article class="product"><div class="thumb">🥤</div><div class="meta"><h4>Softdrink (0,33l)</h4><small>Mehrweg</small></div><div class="price">2,20&nbsp;€</div></article>
+      <article class="product"><div class="thumb">🥤</div><div class="meta"><h4>Wasser (0,5l)</h4><small>still/medium</small></div><div class="price">1,80&nbsp;€</div></article>
+      <article class="product"><div class="thumb">🍟</div><div class="meta"><h4>Chips 150g</h4><small>versch. Sorten</small></div><div class="price">2,50&nbsp;€</div></article>
+      <article class="product"><div class="thumb">🍫</div><div class="meta"><h4>Schokoriegel</h4><small>Einzel</small></div><div class="price">1,60&nbsp;€</div></article>
+      <article class="product"><div class="thumb">🍷</div><div class="meta"><h4>Rotwein 0,75l</h4><small>Hausmarke</small></div><div class="price">9,90&nbsp;€</div></article>
+      <article class="product"><div class="thumb">🍧</div><div class="meta"><h4>Eis am Stiel</h4><small>klassisch</small></div><div class="price">2,00&nbsp;€</div></article>
+    </div>
+  </main>
+
+  <!-- CONTACT -->
+  <section class="section" id="kontakt" aria-labelledby="kontaktTitle">
+    <h2 id="kontaktTitle">Kontakt & Standort</h2>
+    <div class="card" style="display:grid; gap:10px">
+      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <div class="pill">📍 Musterstraße&nbsp;1 · 12345 Musterstadt</div>
+        <a class="btn" href="#">Route planen</a>
+        <a class="btn" href="tel:+491234567890">Anrufen</a>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Danke! Wir melden uns.');" style="display:grid; gap:10px; grid-template-columns: 1fr;">
+        <label>Ihre Nachricht
+          <textarea required rows="4" style="width:100%; margin-top:6px; resize:vertical; background:#0e0f10; color:var(--text); border:1px solid rgba(212,175,55,0.2); border-radius:12px; padding:10px; outline:none; box-shadow: 0 0 0 0 rgba(0,0,0,0);"></textarea>
+        </label>
+        <button class="btn" type="submit" style="justify-self:start">Absenden</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot">
+      <div>© <span id="year"></span> Kiosk 1 · Alle Angaben ohne Gewähr.</div>
+      <div><a href="#">Impressum</a> · <a href="#">Datenschutz</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Öffnungszeiten-Logik: täglich 06:00–24:00
+    (function(){
+      const now = new Date();
+      const open = new Date(now); open.setHours(6,0,0,0);
+      const close = new Date(now); close.setHours(24,0,0,0); // Mitternacht
+      const isOpen = now >= open && now < close;
+      const lamp = document.getElementById('lamp');
+      const statusText = document.getElementById('statusText');
+      const openBadge = document.getElementById('openBadge');
+      if(isOpen){
+        lamp.style.background = '#00d27a';
+        lamp.style.boxShadow = '0 0 0 3px rgba(0,210,122,0.18)';
+        statusText.textContent = 'Jetzt geöffnet';
+        openBadge.querySelector('.dot').style.background = '#00d27a';
+      } else {
+        lamp.style.background = '#ef4444';
+        lamp.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.18)';
+        statusText.textContent = 'Geschlossen';
+        openBadge.querySelector('.dot').style.background = '#ef4444';
+      }
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
